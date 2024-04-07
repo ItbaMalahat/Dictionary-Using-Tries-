@@ -1,0 +1,31 @@
+# Makefile
+
+# Compiler
+CC = gcc
+
+# Compiler flags
+CFLAGS = -Wall
+
+# Executable name
+EXECUTABLE = dictionary
+
+# Source files
+SRCS = main.c dictionary.c trie_node.c trie_operations.c file_io.c
+
+# Object files
+OBJS = $(SRCS:.c=.o)
+
+# Header files
+HEADERS = trie_node.h trie_operations.h dictionary.h file_io.h
+
+# Target: build the executable
+$(EXECUTABLE): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(EXECUTABLE)
+
+# Target: build object files from source files
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Target: clean compiled files
+clean:
+	rm -f $(OBJS) $(EXECUTABLE)
